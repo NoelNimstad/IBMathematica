@@ -111,6 +111,23 @@ let questionBank =
                             &nbsp;${ katex.renderToString(`P(A)=${ data.a.toPrecision(2) }`) }, ${ katex.renderToString(`P(B)=${ data.b.toPrecision(2) }`) },
                             ${ katex.renderToString(`P(A\\cup B)=${ data.c.toPrecision(2) }`) }. Find ${ katex.renderToString(`P(A\\ \\vert\\ B)`) } to two decimal places.`,
         prompt: (seed) => makePrompt(`P(A\\ \\vert\\ B)=`, parseFloat(((data.a + data.b - data.c) / data.b).toPrecision(2)))
+    },
+    {
+        data: {},
+        seed: (seed) => this.data = 
+        {
+            a: getSignedNumberFromPosition(seed, 0),
+            b: getSignedNumberFromPosition(seed, 1),
+            c: getSignedNumberFromPosition(seed, 2),
+            d: getSignedNumberFromPosition(seed, 3),
+            e: getSignedNumberFromPosition(seed, 4),
+            f: getSignedNumberFromPosition(seed, 5),
+            g: getSignedNumberFromPosition(seed, 6),
+            h: getSignedNumberFromPosition(seed, 7),
+            i: getSignedNumberFromPosition(seed, 8),
+        },
+        question: (seed) => "",
+        prompt: (seed) => makePrompt(`\\left|\\begin{matrix}${ data.a } & ${ data.b } & ${ data.c }\\\\${ data.d } & ${ data.e } & ${ data.f }\\\\${ data.g } & ${ data.h } & ${ data.i }\\end{matrix}\\right|=`, data.a * (data.e * data.i - data.f * data.h) - data.b * (data.d * data.i - data.f * data.g) + data.c * (data.d * data.h - data.e * data.g))
     }
 ];
 
