@@ -37,13 +37,8 @@ let questionBank =
             e: getSignedNumberFromPosition(seed, 4),
             f: getSignedNumberFromPosition(seed, 5)
         },
-        question: (seed) => "Determine&nbsp;" + katex.renderToString(`${ ["x", "y", "z"][seed % 3] }`) + "&nbsp;such that&nbsp;" + katex.renderToString(`${ ["x", "y", "z"][seed % 3] }=\\begin{pmatrix}${ data.a }
-                                                                                             \\\\${ data.b }
-                                                                                             \\\\${ data.c }
-                                                             \\end{pmatrix}\\cdot\\begin{pmatrix}${ data.d }
-                                                                                             \\\\${ data.e }
-                                                                                             \\\\${ data.f }\\end{pmatrix}`),
-        prompt: (seed) => makePrompt(`${ ["x", "y", "z"][seed % 3] }=`, data.a * data.d 
+        question: (seed) => "",
+        prompt: (seed) => makePrompt(`\\begin{pmatrix}${ data.a }\\\\${ data.b }\\\\${ data.c }\\end{pmatrix}\\cdot\\begin{pmatrix}${ data.d }\\\\${ data.e }\\\\${ data.f }\\end{pmatrix}=`, data.a * data.d 
                                                                     +   data.b * data.e
                                                                     +   data.c * data.f)
     },
@@ -58,13 +53,8 @@ let questionBank =
             e: getSignedNumberFromPosition(seed, 4),
             f: getSignedNumberFromPosition(seed, 5)
         },
-        question: (seed) => "Determine&nbsp;" + katex.renderToString(`\\vec{v}`) + "&nbsp;such that&nbsp;" + katex.renderToString(`\\vec{v}=\\begin{pmatrix}${ data.a }
-                                                                                             \\\\${ data.b }
-                                                                                             \\\\${ data.c }
-                                                             \\end{pmatrix}\\times\\begin{pmatrix}${ data.d }
-                                                                                             \\\\${ data.e }
-                                                                                             \\\\${ data.f }\\end{pmatrix}`),
-        prompt: (seed) => makePrompt(`\\vec{v}=`, data.b * data.f - data.c * data.e)
+        question: (seed) => "",
+        prompt: (seed) => makePrompt(`\\begin{pmatrix}${ data.a }\\\\${ data.b }\\\\${ data.c }\\end{pmatrix}\\times\\begin{pmatrix}${ data.d }\\\\${ data.e }\\\\${ data.f }\\end{pmatrix}=`, data.b * data.f - data.c * data.e)
                         + makePrompt(`\\hat{\\imath}+\\relax{}`, -(data.a * data.f - data.c * data.d))
                         + makePrompt(`\\hat{\\jmath}+\\relax{}`, data.a * data.e - data.b * data.d)
                         + katex.renderToString(`\\hat{k}`)
@@ -78,11 +68,8 @@ let questionBank =
             c: getSignedNumberFromPosition(seed, 2),
             d: getSignedNumberFromPosition(seed, 3),
         },
-        question: (seed) => "Determine&nbsp;" + katex.renderToString(`${ ["x", "y", "z"][seed % 3] }`) + "&nbsp;such that&nbsp;" + katex.renderToString(`${ ["x", "y", "z"][seed % 3] }=\\begin{pmatrix}${ data.a }
-                                                                                             \\\\${ data.b }
-                                                             \\end{pmatrix}\\cdot\\begin{pmatrix}${ data.c }
-                                                                                             \\\\${ data.d }\\end{pmatrix}`),
-        prompt: (seed) => makePrompt(`${ ["x", "y", "z"][seed % 3] }=`, data.a * data.c + data.b * data.d)
+        question: (seed) => "",
+        prompt: (seed) => makePrompt(`\\begin{pmatrix}${ data.a }\\\\${ data.b }\\end{pmatrix}\\cdot\\begin{pmatrix}${ data.c }\\\\${ data.d }\\end{pmatrix}=`, data.a * data.c + data.b * data.d)
     },
     {
         data: {},
@@ -147,7 +134,16 @@ randomiseButton.addEventListener("click", () =>
     let multiplier = 1;
     for(let i = 0; i < 10; i++)
     {
-        seed += multiplier * Math.floor(Math.random() * 10);
+        let random
+        if(i == 9)
+        {
+            random = Math.floor(Math.random() * 9) + 1;
+        } else 
+        {
+            random = Math.floor(Math.random() * 10);
+        }
+
+        seed += multiplier * random;
         multiplier *= 10;
     }
 
