@@ -1,0 +1,147 @@
+@font-face
+{
+    font-family: ComputerModern;
+    src: url(ComputerModern.ttf);
+}
+
+@font-face
+{
+    font-family: FiraSans;
+    src: url(FiraSans.ttf);
+}
+
+:root 
+{
+    --green: #25cc25;
+    --accent-color: #25cc25;
+    --accent-color-dark: #15aa15;
+}
+
+body 
+{
+    margin: 0;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    font-family: FiraSans, sans-serif;
+    font-size: 0.9rem;
+}
+
+main 
+{
+    width: 40%;
+    min-width: 500px;
+    min-height: 100vh;
+    background-color: white;
+    border-left: 1px solid #ddd;
+    border-right: #efefef;
+    box-shadow: 0 0 10px 0 #ddd;
+    padding: 0 10rem;
+}
+
+h1
+{
+    margin-top: 2rem;
+    font-size: 1.75rem;
+    font-family: ComputerModern, serif;
+    text-align: center;
+    margin-bottom: 0;
+    position: relative;
+}
+
+a
+{
+    color: var(--accent-color);
+    text-decoration: underline solid 0.5px var(--accent-color);
+    transition: 0.1s ease;
+}
+
+a:hover 
+{
+    text-decoration: underline solid 2px var(--accent-color);
+}
+
+hr 
+{
+    margin-top: 2rem;
+    border: none;
+    border-bottom: 1px solid gray;
+    margin-bottom: 2rem;
+}
+
+h2 
+{
+    font-size: 1.5rem;
+    text-align: center;
+    font-family: ComputerModern, serif;
+}
+
+button 
+{
+    background-color: var(--accent-color);
+    color: white;
+    background: linear-gradient(to top, var(--accent-color-dark), var(--accent-color));
+    border: 1px solid var(--accent-color);
+    border-radius: 4px;
+    font-family: FiraSans, sans-serif;
+    padding: 0.2rem 0.5rem;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+button:hover 
+{
+    filter: brightness(110%);
+}
+
+.random 
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.random > span 
+{
+    color: gray;
+}
+
+.question
+{
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.answer 
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.25rem;
+}
+
+.answer > input 
+{
+    width: 3.5rem;
+    border-radius: 0;
+    border: 1px solid lightgray;
+}
+
+.answer > input:focus 
+{
+    outline: none;
+    border: 1px solid var(--accent-color);
+}
+
+.answer > input.correct
+{
+    border: 1px dashed var(--green);
+}
+
+span 
+{
+    white-space: nowrap;
+}
