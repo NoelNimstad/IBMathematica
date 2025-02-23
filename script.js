@@ -130,7 +130,7 @@ let questionBank =
             };
             if(data.a == 0) data.a == 2;
         },
-        question: (seed) => katex.renderToString(`z=${ data.a }i${ data.b < 0 ? ( data.b ) : ( "+" + data.b ) }`),
+        question: (seed) => katex.renderToString(`z=${ data.a == -1 ? "-" : (data.a == 1 ? "" : data.a) }i${ data.b == 0 ? "" : (data.b < 0 ? (data.b) : ("+" + data.b)) }`),
         prompt: (seed) => makePrompt(`\\Im(z)=`, data.a) + "," + makePrompt(`\\Re(z)=`, data.b)
     },
     {
@@ -145,7 +145,7 @@ let questionBank =
             this.data.c = data.b / (1 - data.a ** 2);
             this.data.d = -data.a * data.c;
         },
-        question: (seed) => "Consider the equation&nbsp;" + katex.renderToString(`\\frac{${ data.a }z}{${ data.b }-z^{*}}=i`) + ", where&nbsp;" + katex.renderToString(`z=a+bi`) + "&nbsp;and&nbsp;" + katex.renderToString(`a,b\\in\\mathbb{R}`) + ". Find the values of&nbsp;" + katex.renderToString("a") + "&nbsp;and&nbsp;" + katex.renderToString("b") + "&nbsp;to two decimal places.",
+        question: (seed) => "Consider the equation&nbsp;" + katex.renderToString(`\\frac{${ data.a }z}{${ data.b }-z^{*}}=i`) + ", where&nbsp;" + katex.renderToString(`z=a+ib`) + "&nbsp;and&nbsp;" + katex.renderToString(`a,b\\in\\mathbb{R}`) + ". Find the values of&nbsp;" + katex.renderToString("a") + "&nbsp;and&nbsp;" + katex.renderToString("b") + "&nbsp;to two decimal places.",
         prompt: (seed) => makePrompt(`a=`, data.c) + "," + makePrompt(`b=`, data.d)
     }
 ];
