@@ -16,7 +16,10 @@ function getNumberFromPosition(number, index)
 
 function getSignFromPosition(number, index)
 {
-    return [-1, 1][parseInt(number.toString()[index]) % 2]
+    const digits = number.toString();
+    if (index >= digits.length - 1) return 1;
+    const modValue = (parseInt(digits[index]) + parseInt(digits[index + 1])) % 3;
+    return modValue === 0 ? -1 : 1;
 }
 
 function getSignedNumberFromPosition(number, index)
@@ -115,6 +118,35 @@ let questionBank =
         },
         question: (seed) => "",
         prompt: (seed) => makePrompt(`\\left|\\begin{matrix}${ data.a } & ${ data.b } & ${ data.c }\\\\${ data.d } & ${ data.e } & ${ data.f }\\\\${ data.g } & ${ data.h } & ${ data.i }\\end{matrix}\\right|=`, data.a * (data.e * data.i - data.f * data.h) - data.b * (data.d * data.i - data.f * data.g) + data.c * (data.d * data.h - data.e * data.g))
+    },
+    {
+        data: {},
+        seed: (seed) =>
+        {
+            this.data =
+            {
+                a: getSignedNumberFromPosition(seed, 0),
+                b: getSignedNumberFromPosition(seed, 1)
+            };
+            if(data.a == 0) data.a == 2;
+        },
+        question: (seed) => katex.renderToString(`z=${ data.a }i${ data.b < 0 ? ( data.b ) : ( "+" + data.b ) }`),
+        prompt: (seed) => makePrompt(`\\Im(z)=`, data.a) + "," + makePrompt(`\\Re(z)=`, data.b)
+    },
+    {
+        data: {},
+        seed: (seed) => 
+        {
+            this.data =
+            {
+                a: getNumberFromPosition(seed, 0),
+                b: getNumberFromPosition(seed, 1)
+            };
+            this.data.c = data.b / (1 - data.a ** 2);
+            this.data.d = -data.a * data.c;
+        },
+        question: (seed) => "Consider the equation&nbsp;" + katex.renderToString(`\\frac{${ data.a }z}{${ data.b }-z^{*}}=i`) + ", where&nbsp;" + katex.renderToString(`z=a+bi`) + "&nbsp;and&nbsp;" + katex.renderToString(`a,b\\in\\mathbb{R}`) + ". Find the values of&nbsp;" + katex.renderToString("a") + "&nbsp;and&nbsp;" + katex.renderToString("b") + "&nbsp;to two decimal places.",
+        prompt: (seed) => makePrompt(`a=`, data.c) + "," + makePrompt(`b=`, data.d)
     }
 ];
 
